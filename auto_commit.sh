@@ -13,9 +13,9 @@ COMMIT_MESSAGE="Auto commit at $NOW"
 # Thực hiện các lệnh Git
 git add .
 git commit -m "$COMMIT_MESSAGE"
-git pull origin master
+#git pull origin master
 git push origin master  # Thay 'main' bằng tên nhánh của bạn nếu cần
 
 # Đợi 10 phút (600 giây) trước khi thực hiện lần tiếp theo
-sleep 600
+sleep 10
     
