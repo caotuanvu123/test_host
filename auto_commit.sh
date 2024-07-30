@@ -14,5 +14,5 @@ while true; do
     git push origin master
 
     # Đợi 10 phút (600 giây) trước khi thực hiện lần tiếp theo
-    sleep 600
+    sleep 620
 done
