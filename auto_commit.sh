@@ -7,7 +7,7 @@ while true; do
 
     NOW=$(date +"%Y-%m-%d %H:%M:%S")
     COMMIT_MESSAGE="Auto commit at $NOW"
-
+    #aa
     git add .
     git commit -m "$COMMIT_MESSAGE"
     #git pull origin master
