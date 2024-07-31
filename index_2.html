@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Book Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div>
+        <canvas id="bidsChart" width="400" height="200"></canvas>
+    </div>
+    <div>
+        <canvas id="asksChart" width="400" height="200"></canvas>
+    </div>
+    <div style="width: 30%; margin: 0px auto;">
+        <canvas id="myPieChart" width="400" height="200"></canvas>
+    </div>
+    <script>
+
+        let bidsData = {};
+        let asksData = {};
+        let labels = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const bidsCtx = document.getElementById('bidsChart').getContext('2d');
+            const ctx = document.getElementById('myPieChart').getContext('2d');
+
+            // Khởi tạo biểu đồ Chart.js cho Bids
+            const bidsChart = new Chart(bidsCtx, {
+                type: 'bar',
+                data: {
+                    labels: [],  // Các nhãn trục x (giá)
+                    datasets: [
+                        {
+                            label: 'Bids',
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            data: []  // Dữ liệu cho các lệnh mua
+                        },
+                        {
+                            label: 'Asks',
+                            backgroundColor: 'red',
+                            data: []  // Dữ liệu cho các lệnh bán
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Price'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Quantity'
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const quantity = context.raw;
+                                    return `Quantity: ${quantity}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Khởi tạo biểu đồ Chart.js cho Pie Chart
+            const myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Asks', 'Bids'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['#FF6384', '#36A2EB'],
+                        hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            const today = new Date();
+
+            // Lấy các thành phần của ngày hiện tại
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+            const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+
+            // Định dạng ngày hiện tại theo kiểu YYYY-MM-DD
+            const formattedDate = `${year}-${month}-${day}`;
+
+            // Đường dẫn đầy đủ tới file CSV
+            const csvFilePath = `csv/future_order_book_btcusdt_${formattedDate}.csv`;
+
+            // Đường dẫn đầy đủ tới file CSV
+            const addedEntries = new Set();
+
+            // Hàm load dữ liệu và cập nhật biểu đồ
+            let totalBids = 0;
+            let totalAsks = 0;
+            function loadDataAndVisualize() {
+                fetch(csvFilePath)
+                    .then(response => response.text())
+                    .then(data => {
+                        // Xử lý dữ liệu CSV
+                        let rows = data.split('\n');
+                        
+                        rows.forEach(row => {
+                            const columns = row.split(',');
+                            if (columns.length === 5) {
+                                const time = columns[0];
+                                const pair = columns[1];
+                                const type = columns[2];
+                                const price = parseFloat(columns[3]);
+                                const quantity = parseFloat(columns[4]);
+                            
+                                if (!isNaN(price) && !isNaN(quantity)) {
+                                    const key = `${type}-${price}-${quantity}`;
+                                    if (!addedEntries.has(key)) {
+                                        addedEntries.add(key);
+                                        if (type === 'bid') {
+                                            if (!bidsData[price]) {
+                                                bidsData[price] = 0;
+                                            }
+                                            bidsData[price] += quantity;
+                                            totalBids += quantity;
+                                        } else if (type === 'ask') {
+                                            if (!asksData[price]) {
+                                                asksData[price] = 0;
+                                            }
+                                            asksData[price] += quantity;
+                                            totalAsks += quantity;
+                                        }
+                                        if (!labels.includes(price)) {
+                                            labels.push(price);
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        // Sắp xếp các giá trị nhãn trục x
+                        labels.sort((a, b) => a - b);
+
+                        // Chuyển đổi object thành mảng để cập nhật vào biểu đồ
+                        const bidsChartData = labels.map(price => bidsData[price] || 0);
+                        const asksChartData = labels.map(price => asksData[price] || 0);
+
+                        // Cập nhật dữ liệu cho biểu đồ
+                        bidsChart.data.labels = labels; // Sử dụng giá làm nhãn trục x
+                        bidsChart.data.datasets[0].data = bidsChartData;
+                        bidsChart.data.datasets[1].data = asksChartData;
+                        myPieChart.data.datasets[0].data = [totalAsks, totalBids];
+
+                        // Cập nhật biểu đồ
+                        bidsChart.update();
+                        myPieChart.update();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+
+            // Load dữ liệu và cập nhật biểu đồ ban đầu
+            loadDataAndVisualize();
+
+            // Cập nhật dữ liệu mỗi 5 giây
+            setInterval(loadDataAndVisualize, 10000); // Cập nhật mỗi 5 giây
+
+            // // Hàm để lưu biểu đồ dưới dạng hình ảnh
+            // function saveChartAsImage(chart, filename) {
+            //     const link = document.createElement('a');
+            //     link.href = chart.toBase64Image();
+            //     link.download = filename;
+            //     link.click();
+            // }
+
+            // // Event listeners cho nút lưu biểu đồ
+            // document.getElementById('savePieChart').addEventListener('click', function() {
+            //     saveChartAsImage(myPieChart, 'pie_chart.png');
+            // });
+            
+            // document.getElementById('saveBidsChart').addEventListener('click', function() {
+            //     saveChartAsImage(bidsChart, 'bids_chart.png');
+            // });
+        });
+    </script>
+</body>
+</html>
