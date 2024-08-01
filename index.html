@@ -4414,7 +4414,7 @@
                         </h4>
         
                         <!-- Caption -->
-                        <span class="text-body-secondary me-3">
+                        <span id="datetime_btc" class="text-body-secondary me-3">
                           yyyy/mm/dd
                         </span>
         
@@ -5331,22 +5331,15 @@
                         </h4>
         
                         <!-- Caption -->
-                        <span class="text-body-secondary me-3">
-                          Last year comparision:
+                        <span id="datetime_eth" class="text-body-secondary me-3">
+                          
                         </span>
-        
-                        <!-- Switch -->
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="cardToggle" data-toggle="chart" data-target="#conversionsChart" data-trigger="change" data-action="add" data-dataset="1">
-                          <label class="form-check-label" for="cardToggle"></label>
-                        </div>
-        
                       </div>
                       <div class="card-body">
         
                         <!-- Chart -->
                         <div class="chart">
-                          <canvas id="bidsChartsol" class="chart-canvas"></canvas>
+                          <canvas id="bidsCharteth" class="chart-canvas"></canvas>
                         </div>
         
                       </div>
@@ -6267,22 +6260,15 @@
                         </h4>
         
                         <!-- Caption -->
-                        <span class="text-body-secondary me-3">
-                          Last year comparision:
+                        <span id="datetime_sol" class="text-body-secondary me-3">
+                           
                         </span>
-        
-                        <!-- Switch -->
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" id="cardToggle" data-toggle="chart" data-target="#conversionsChart" data-trigger="change" data-action="add" data-dataset="1">
-                          <label class="form-check-label" for="cardToggle"></label>
-                        </div>
-        
                       </div>
                       <div class="card-body">
         
                         <!-- Chart -->
                         <div class="chart">
-                          <canvas id="bidsCharteth" class="chart-canvas"></canvas>
+                          <canvas id="bidsChartsol" class="chart-canvas"></canvas>
                         </div>
         
                       </div>
@@ -7086,6 +7072,16 @@
     chartShow('btc')
     chartShow('eth')
     chartShow('sol')
+
+    const today = new Date();
+
+    // Lấy các thành phần của ngày hiện tại
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+    const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+
+    // Định dạng ngày hiện tại theo kiểu YYYY-MM-DD
+    const formattedDate = `${year}-${month}-${day}`;
     function chartShow(symbol) {
         let bidsData = {};
         let asksData = {};
@@ -7169,15 +7165,6 @@
                 }
             }
         });
-        const today = new Date();
-
-        // Lấy các thành phần của ngày hiện tại
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
-        const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
-
-        // Định dạng ngày hiện tại theo kiểu YYYY-MM-DD
-        const formattedDate = `${year}-${month}-${day}`;
 
         // Đường dẫn đầy đủ tới file CSV
         const csvFilePath = `csv/future_order_book_${symbol}usdt_${formattedDate}.csv`;
@@ -7257,5 +7244,9 @@
         setInterval(loadDataAndVisualize, 10000); // Cập nhật mỗi 5 giây
     });
     }
+
+    document.getElementById('datetime_btc').innerText = formattedDate
+    document.getElementById('datetime_sol').innerText = formattedDate
+    document.getElementById('datetime_eth').innerText = formattedDate
 </script>
 </html>
