@@ -4485,7 +4485,7 @@
                         <a href="project-overview.html" class="small">View all</a>
         
                       </div>
-                      <div class="card-body">
+                      <div class="card-body" style="margin-top: 0px;">
         
                         <!-- List group -->
                         <div class="list-group list-group-flush my-n3">
@@ -4717,7 +4717,6 @@
                                 </div>
                                 <!-- TradingView Widget END -->
                             </div>
-        
                       </div>
                     </div>
         
@@ -5410,14 +5409,14 @@
         
                         <!-- Title -->
                         <h4 class="card-header-title">
-                          Projects
+                          Top OB
                         </h4>
         
                         <!-- Link -->
                         <a href="project-overview.html" class="small">View all</a>
         
                       </div>
-                      <div class="card-body">
+                      <div class="card-body" style="margin-top: 0px;">
         
                         <!-- List group -->
                         <div class="list-group list-group-flush my-n3">
@@ -5618,36 +5617,37 @@
         
                         <!-- Title -->
                         <h4 class="card-header-title">
-                          Sales
+                            TradingView
                         </h4>
-        
-                        <!-- Nav -->
-                        <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                            <a class="nav-link active" href="#" data-bs-toggle="tab">
-                              All
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="1">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Direct
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="2">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Organic
-                            </a>
-                          </li>
-                        </ul>
         
                       </div>
                       <div class="card-body">
-        
-                        <!-- Chart -->
-                        <div class="chart">
-                          <canvas id="salesChart" class="chart-canvas"></canvas>
+                        <div class="chart chart-container">
+                            <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container">
+                              <div id="tradingview_eth"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                              <script type="text/javascript">
+                              new TradingView.widget(
+                                {
+                                  "width": "100%",
+                                  "height": "100%",
+                                  "symbol": "BINANCE:ETHUSDT",
+                                  "interval": "D",
+                                  "timezone": "Etc/UTC",
+                                  "theme": "light",
+                                  "style": "1",
+                                  "locale": "en",
+                                  "toolbar_bg": "#f1f3f6",
+                                  "enable_publishing": false,
+                                  "allow_symbol_change": true,
+                                  "container_id": "tradingview_eth"
+                                }
+                              );
+                              </script>
+                            </div>
+                            <!-- TradingView Widget END -->
                         </div>
-        
                       </div>
                     </div>
         
@@ -6339,14 +6339,14 @@
         
                         <!-- Title -->
                         <h4 class="card-header-title">
-                          Projects
+                          Top OB
                         </h4>
         
                         <!-- Link -->
                         <a href="project-overview.html" class="small">View all</a>
         
                       </div>
-                      <div class="card-body">
+                      <div class="card-body" style="margin-top: 0px;">
         
                         <!-- List group -->
                         <div class="list-group list-group-flush my-n3">
@@ -6547,36 +6547,40 @@
         
                         <!-- Title -->
                         <h4 class="card-header-title">
-                          Sales
+                          TradingView
                         </h4>
-        
-                        <!-- Nav -->
-                        <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                            <a class="nav-link active" href="#" data-bs-toggle="tab">
-                              All
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="1">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Direct
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="2">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Organic
-                            </a>
-                          </li>
-                        </ul>
+
         
                       </div>
                       <div class="card-body">
         
                         <!-- Chart -->
-                        <div class="chart">
-                          <canvas id="salesChart" class="chart-canvas"></canvas>
+                        <div class="chart chart-container">
+                            <!-- TradingView Widget BEGIN -->
+                            <div class="tradingview-widget-container">
+                              <div id="tradingview_sol"></div>
+                              <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                              <script type="text/javascript">
+                              new TradingView.widget(
+                                {
+                                  "width": "100%",
+                                  "height": "100%",
+                                  "symbol": "BINANCE:SOLUSDT",
+                                  "interval": "D",
+                                  "timezone": "Etc/UTC",
+                                  "theme": "light",
+                                  "style": "1",
+                                  "locale": "en",
+                                  "toolbar_bg": "#f1f3f6",
+                                  "enable_publishing": false,
+                                  "allow_symbol_change": true,
+                                  "container_id": "tradingview_sol"
+                                }
+                              );
+                              </script>
+                            </div>
+                            <!-- TradingView Widget END -->
                         </div>
-        
                       </div>
                     </div>
         
