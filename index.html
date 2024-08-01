@@ -22,6 +22,20 @@
     <!-- Title -->
     <title>Coins Price</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Đặt kích thước của container cha */
+        .chart-container {
+            width: 100%;
+            height: 100vh; /* Chiều cao của toàn bộ khung nhìn */
+            position: relative;
+        }
+        /* Đặt kích thước của widget bên trong container cha */
+        .tradingview-widget-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+    </style>
 
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -4672,56 +4686,37 @@
         
                         <!-- Title -->
                         <h4 class="card-header-title">
-                          Candles
+                          TradingView
                         </h4>
-        
-                        <!-- Nav -->
-                        <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="0">
-                            <a class="nav-link active" href="#" data-bs-toggle="tab">
-                              All
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="1">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Direct
-                            </a>
-                          </li>
-                          <li class="nav-item" data-toggle="chart" data-target="#salesChart" data-trigger="click" data-action="toggle" data-dataset="2">
-                            <a class="nav-link" href="#" data-bs-toggle="tab">
-                              Organic
-                            </a>
-                          </li>
-                        </ul>
-        
                       </div>
                       <div class="card-body">
-        
                         <!-- Chart -->
-                        <div class="chart">
-                            <div class="tradingview-widget-container">
-                                <div id="tradingview_12345"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                <script type="text/javascript">
-                                new TradingView.widget(
-                                  {
-                                    "width": auto,
-                                    "height": 610,
-                                    "symbol": "BINANCE:BTCUSDT",
-                                    "interval": "D",
-                                    "timezone": "Etc/UTC",
-                                    "theme": "light",
-                                    "style": "1",
-                                    "locale": "en",
-                                    "toolbar_bg": "#f1f3f6",
-                                    "enable_publishing": false,
-                                    "allow_symbol_change": true,
-                                    "container_id": "tradingview_12345"
-                                  }
-                                );
-                                </script>
-                              </div>
-                        </div>
+                            <div class="chart chart-container">
+                                <!-- TradingView Widget BEGIN -->
+                                <div class="tradingview-widget-container">
+                                  <div id="tradingview_12345"></div>
+                                  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                                  <script type="text/javascript">
+                                  new TradingView.widget(
+                                    {
+                                      "width": "100%",
+                                      "height": "100%",
+                                      "symbol": "BINANCE:BTCUSDT",
+                                      "interval": "D",
+                                      "timezone": "Etc/UTC",
+                                      "theme": "light",
+                                      "style": "1",
+                                      "locale": "en",
+                                      "toolbar_bg": "#f1f3f6",
+                                      "enable_publishing": false,
+                                      "allow_symbol_change": true,
+                                      "container_id": "tradingview_12345"
+                                    }
+                                  );
+                                  </script>
+                                </div>
+                                <!-- TradingView Widget END -->
+                            </div>
         
                       </div>
                     </div>
