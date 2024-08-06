@@ -7407,6 +7407,9 @@
   <!-- Theme JS -->
   <script src="https://dashkit.goodthemes.co/assets/js/theme.bundle.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </body>
 <style>
   .nav-tabs .nav-item {
@@ -7561,6 +7564,7 @@
 
   let chartInstances = {};
   let alertShown = {};
+
 
   function chartShow(coinType, selectedDate) {
     let bidsData = {};
@@ -7808,6 +7812,7 @@
     alertShown[coinType] = false;
 
     loadDataAndVisualize();
+    setInterval(loadDataAndVisualize, 10000); 
 
   }
   document.getElementById('datetime_btc').style.display = 'none';
