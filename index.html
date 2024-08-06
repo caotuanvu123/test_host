@@ -2079,23 +2079,23 @@
               <div class="collapse show" id="sidebarDashboards">
                 <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="btc-tab" data-bs-toggle="tab" data-bs-target="#btc" type="button"
-                      role="tab" aria-controls="btc" aria-selected="true">
+                    <a id="btcPageButton" class="nav-link active" id="btc-tab" data-bs-toggle="tab"
+                      data-bs-target="#btc" type="button" role="tab" aria-controls="btc" aria-selected="true">
                       <img src="https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400"
                         alt="Bitcoin" width="24" height="24" style="margin-right: 8px;" />
                       BTC/USDT
                     </a>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="eth-tab" data-bs-toggle="tab" data-bs-target="#eth" type="button" role="tab"
-                      aria-controls="eth" aria-selected="false">
+                    <a id="ethPageButton" class="nav-link" id="eth-tab" data-bs-toggle="tab" data-bs-target="#eth"
+                      type="button" role="tab" aria-controls="eth" aria-selected="false">
                       <img src="https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628" alt=""
                         width="24" height="24" style="margin-right: 8px;">
                       ETH/USDT</a>
                   </li>
                   <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="sol-tab" data-bs-toggle="tab" data-bs-target="#sol" type="button" role="tab"
-                      aria-controls="sol" aria-selected="false">
+                    <a id="solPageButton" class="nav-link" id="sol-tab" data-bs-toggle="tab" data-bs-target="#sol"
+                      type="button" role="tab" aria-controls="sol" aria-selected="false">
                       <img src="https://assets.coingecko.com/coins/images/4128/standard/solana.png?1718769756"
                         alt="Solana" width="24" height="24" style="margin-right: 8px;">
                       SOL/USDT</a>
@@ -4487,7 +4487,7 @@
                       </h6>
 
                       <!-- Heading -->
-                      <span data-symbol="BTCUSDT" class="h2 mb-0" id="btc-value">
+                      <span data-symbol="BTCUSDT" coinType="btc" class="h2 mb-0" id="btc-value">
                         <!-- $24,500 -->
                       </span>
 
@@ -4618,14 +4618,13 @@
                       yyyy/mm/dd
                     </span>
 
-                    <!-- Selectbox for date range -->
-                    <select id="dateRangeSelect_btc" class="form-select">
-                      <option value="1" selected>1 Day</option>
-                      <option value="7">7 Days</option>
-                      <option value="14">14 Days</option>
-                      <option value="30">30 Days</option>
+                    <!-- Selectbox for specific dates -->
+                    <select id="dateRangeSelect_btc" class="form-select"
+                      onchange="updateChartsBasedOnSelectedDate('btc')">
+                      <!-- Options sẽ được tạo động bằng JavaScript -->
                     </select>
                   </div>
+
 
                 </div>
                 <div class="card-body">
@@ -5450,7 +5449,7 @@
                       </h6>
 
                       <!-- Heading -->
-                      <span data-symbol="ETHUSDT" class="h2 mb-0" id="eth-value">
+                      <span data-symbol="ETHUSDT" coinType="eth" class="h2 mb-0" id="eth-value">
                         <!-- $24,500 -->
                       </span>
 
@@ -5582,14 +5581,13 @@
                       yyyy/mm/dd
                     </span>
 
-                    <!-- Selectbox for date range -->
-                    <select id="dateRangeSelect_eth" class="form-select">
-                      <option value="1" selected>1 Day</option>
-                      <option value="7">7 Days</option>
-                      <option value="14">14 Days</option>
-                      <option value="30">30 Days</option>
+                    <!-- Selectbox for specific dates -->
+                    <select id="dateRangeSelect_eth" class="form-select"
+                      onchange="updateChartsBasedOnSelectedDate('eth')">
+                      <!-- Options sẽ được tạo động bằng JavaScript -->
                     </select>
                   </div>
+
                 </div>
                 <div class="card-body">
 
@@ -5612,6 +5610,7 @@
                     Pie ETH Charts
                   </h4>
 
+
                   <!-- Tabs -->
                   <ul class="nav nav-tabs nav-tabs-sm card-header-tabs">
                     <li class="nav-item" data-toggle="chart" data-target="#trafficChart" data-trigger="click"
@@ -5633,7 +5632,7 @@
 
                   <!-- Chart -->
                   <div class="chart chart-appended">
-                    <canvas id="myPieChartsol"></canvas>
+                    <canvas id="myPieCharteth"></canvas>
                   </div>
 
                   <!-- Legend -->
@@ -6429,7 +6428,7 @@
                       </h6>
 
                       <!-- Heading -->
-                      <span data-symbol="SOLUSDT" class="h2 mb-0" id="sol-value">
+                      <span data-symbol="SOLUSDT" coinType="sol" class="h2 mb-0" id="sol-value">
                         <!-- $24,500 -->
                       </span>
 
@@ -6561,14 +6560,12 @@
                       yyyy/mm/dd
                     </span>
 
-                    <!-- Selectbox for date range -->
+                    <!-- Selectbox for specific dates -->
                     <select id="dateRangeSelect_sol" class="form-select">
-                      <option value="1" selected>1 Day</option>
-                      <option value="7">7 Days</option>
-                      <option value="14">14 Days</option>
-                      <option value="30">30 Days</option>
+                      <!-- Options sẽ được tạo động bằng JavaScript -->
                     </select>
                   </div>
+
 
                 </div>
                 <div class="card-body">
@@ -6613,7 +6610,7 @@
 
                   <!-- Chart -->
                   <div class="chart chart-appended">
-                    <canvas id="myPieCharteth"></canvas>
+                    <canvas id="myPieChartsol"></canvas>
                   </div>
 
                   <!-- Legend -->
@@ -7432,7 +7429,6 @@
     }
   }
 
-
   async function fetchPercentageChange(id) {
     const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`; // Lấy dữ liệu trong 1 ngày
 
@@ -7484,216 +7480,340 @@
   updatePricesAndBadges();
   setInterval(updatePricesAndBadges, 60000); // Cập nhật mỗi phút
 
-  function initializeDateRangeUpdater(selectId, spanId) {
+  function updateChartsBasedOnSelectedDate(coinType) {
+    const selectedDate = document.getElementById(`dateRangeSelect_${coinType}`).value;
+    document.getElementById(`datetime_${coinType}`).textContent = selectedDate;
+    chartShow(coinType, selectedDate);
+  }
+
+  function initializeDateRangeUpdater(selectId, spanId, coinType) {
     const selectElement = document.getElementById(selectId);
     const spanElement = document.getElementById(spanId);
 
     selectElement.addEventListener('change', function () {
-      updateDateRange(this.value, spanElement);
+      const selectedDate = this.value;
+      spanElement.textContent = selectedDate;
+      updateChartsBasedOnSelectedDate(coinType, selectedDate);
+      startUpdatingData(coinType, selectedDate); // Bắt đầu cập nhật dữ liệu
     });
 
-    // Khởi tạo giá trị mặc định khi tải trang
-    updateDateRange(selectElement.value, spanElement);
+    spanElement.textContent = new Date().toISOString().split('T')[0].replace(/-/g, '/');
   }
 
-  function updateDateRange(selectedDays, spanElement) {
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setDate(endDate.getDate() - selectedDays); // Tính toán ngày bắt đầu
 
-    const formatDate = (date) => date.toISOString().split('T')[0].replace(/-/g, '/');
+  document.addEventListener('DOMContentLoaded', function () {
+    initializeDateRangeUpdater('dateRangeSelect_btc', 'datetime_btc', 'btc');
+    initializeDateRangeUpdater('dateRangeSelect_eth', 'datetime_eth', 'eth');
+    initializeDateRangeUpdater('dateRangeSelect_sol', 'datetime_sol', 'sol');
 
-    if (selectedDays === "1") {
-      spanElement.textContent = `${formatDate(endDate)}`;
-    } else {
-      spanElement.textContent = `${formatDate(startDate)} - ${formatDate(endDate)}`;
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }
+
+    function generateDateOptions(selectId) {
+      const selectElement = document.getElementById(selectId);
+      const today = new Date();
+      for (let i = 0; i < 30; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        const formattedDate = formatDate(date);
+
+        const option = document.createElement('option');
+        option.value = formattedDate;
+        option.textContent = formattedDate;
+        selectElement.appendChild(option);
+      }
+    }
+
+    generateDateOptions('dateRangeSelect_btc');
+    generateDateOptions('dateRangeSelect_eth');
+    generateDateOptions('dateRangeSelect_sol');
+
+
+
+    updateChartsBasedOnSelectedDate('btc');
+
+  });
+  document.getElementById('dateRangeSelect_btc').addEventListener('change', () => updateChartsBasedOnSelectedDate('btc'));
+
+  // Handle page navigation or coin type change
+  function onCoinTypeChange(newCoinType) {
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0].replace(/-/g, '/');
+    updateChartsBasedOnSelectedDate(newCoinType, formattedDate);
   }
 
-  initializeDateRangeUpdater('dateRangeSelect_btc', 'datetime_btc');
-  initializeDateRangeUpdater('dateRangeSelect_eth', 'datetime_eth');
-  initializeDateRangeUpdater('dateRangeSelect_sol', 'datetime_sol');
-
-
-  chartShow('btc')
-  chartShow('eth')
-  chartShow('sol')
-
+  // Event listeners for navigation or tab changes
+  document.getElementById('btcPageButton').addEventListener('click', () => onCoinTypeChange('btc'));
+  document.getElementById('ethPageButton').addEventListener('click', () => onCoinTypeChange('eth'));
+  document.getElementById('solPageButton').addEventListener('click', () => onCoinTypeChange('sol'));
   const today = new Date();
 
-  // Lấy các thành phần của ngày hiện tại
   const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
-  const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
 
-  // Định dạng ngày hiện tại theo kiểu YYYY-MM-DD
   const formattedDate = `${year}-${month}-${day}`;
-  function chartShow(symbol) {
+
+
+  let chartInstances = {};
+  let alertShown = {};
+
+  function chartShow(coinType, selectedDate) {
     let bidsData = {};
     let asksData = {};
     let labels = [];
-    document.addEventListener('DOMContentLoaded', function () {
-      const bidsCtx = document.getElementById('bidsChart' + symbol).getContext('2d');
-      const ctx = document.getElementById('myPieChart' + symbol).getContext('2d');
 
-      // Khởi tạo biểu đồ Chart.js cho Bids
-      const bidsChart = new Chart(bidsCtx, {
-        type: 'bar',
-        data: {
-          labels: [],  // Các nhãn trục x (giá)
-          datasets: [
-            {
-              label: 'Bids',
-              backgroundColor: 'rgba(54, 162, 235, 0.6)',
-              data: []  // Dữ liệu cho các lệnh mua
-            },
-            {
-              label: 'Asks',
-              backgroundColor: 'red',
-              data: []  // Dữ liệu cho các lệnh bán
+    const csvFilePath = `csv/future_order_book_${coinType}usdt_${selectedDate}.csv`;
+    const addedEntries = new Set();
+
+    function loadDataAndVisualize() {
+      fetch(csvFilePath)
+        .then(response => {
+          console.log(`Fetching data from: ${csvFilePath}`); // Log đường dẫn để kiểm tra
+          if (!response.ok) {
+            if (!alertShown[coinType]) {
+              alert(`Current data is not available for ${coinType.toUpperCase()} on ${selectedDate}`);
+              alertShown[coinType] = true;
             }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Price'
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Quantity'
-              }
-            }
-          },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  const quantity = context.raw;
-                  return `Quantity: ${quantity}`;
-                }
-              }
-            }
+            throw new Error('File not found');
           }
-        }
-      });
+          return response.text();
+        })
+        .then(data => {
+          console.log(`Data fetched for ${coinType}:`, data);
+          let rows = data.split('\n');
 
-      // Khởi tạo biểu đồ Chart.js cho Pie Chart
-      const myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ['Asks', 'Bids'],
-          datasets: [{
-            data: [0, 0],
-            backgroundColor: ['#FF6384', '#36A2EB'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB']
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem) {
-                  return tooltipItem.label + ': ' + tooltipItem.raw;
-                }
-              }
-            }
-          }
-        }
-      });
+          rows.forEach(row => {
+            const columns = row.split(',');
+            if (columns.length === 5) {
+              const type = columns[2];
+              const price = parseFloat(columns[3]);
+              const quantity = parseFloat(columns[4]);
 
-      // Đường dẫn đầy đủ tới file CSV
-      const csvFilePath = `csv/future_order_book_${symbol}usdt_${formattedDate}.csv`;
-
-      // Đường dẫn đầy đủ tới file CSV
-      const addedEntries = new Set();
-
-      // Hàm load dữ liệu và cập nhật biểu đồ
-      let totalBids = 0;
-      let totalAsks = 0;
-      function loadDataAndVisualize() {
-        fetch(csvFilePath)
-          .then(response => response.text())
-          .then(data => {
-            // Xử lý dữ liệu CSV
-            let rows = data.split('\n');
-
-            rows.forEach(row => {
-              const columns = row.split(',');
-              if (columns.length === 5) {
-                const time = columns[0];
-                const pair = columns[1];
-                const type = columns[2];
-                const price = parseFloat(columns[3]);
-                const quantity = parseFloat(columns[4]);
-
-                if (!isNaN(price) && !isNaN(quantity)) {
-                  const key = `${type}-${price}-${quantity}`;
-                  if (!addedEntries.has(key)) {
-                    addedEntries.add(key);
-                    if (type === 'bid') {
-                      if (!bidsData[price]) {
-                        bidsData[price] = 0;
-                      }
-                      bidsData[price] += quantity;
-                      totalBids += quantity;
-                    } else if (type === 'ask') {
-                      if (!asksData[price]) {
-                        asksData[price] = 0;
-                      }
-                      asksData[price] += quantity;
-                      totalAsks += quantity;
+              if (!isNaN(price) && !isNaN(quantity)) {
+                const key = `${type}-${price}-${quantity}`;
+                if (!addedEntries.has(key)) {
+                  addedEntries.add(key);
+                  if (type === 'bid') {
+                    if (!bidsData[price]) {
+                      bidsData[price] = 0;
                     }
-                    if (!labels.includes(price)) {
-                      labels.push(price);
+                    bidsData[price] += quantity;
+                  } else if (type === 'ask') {
+                    if (!asksData[price]) {
+                      asksData[price] = 0;
+                    }
+                    asksData[price] += quantity;
+                  }
+                  if (!labels.includes(price)) {
+                    labels.push(price);
+                  }
+                }
+              }
+            }
+          });
+
+          labels.sort((a, b) => a - b);
+
+          const bidsChartData = labels.map(price => bidsData[price] || 0);
+          const asksChartData = labels.map(price => asksData[price] || 0);
+
+          const totalBids = bidsChartData.reduce((sum, val) => sum + val, 0);
+          const totalAsks = asksChartData.reduce((sum, val) => sum + val, 0);
+
+          const ctx = document.getElementById(`myPieChart${coinType}`).getContext('2d');
+          const bidsCtx = document.getElementById(`bidsChart${coinType}`).getContext('2d');
+
+
+          if (chartInstances['bidsChart' + coinType]) {
+            chartInstances['bidsChart' + coinType].destroy();
+          }
+          if (chartInstances['myPieChart' + coinType]) {
+            chartInstances['myPieChart' + coinType].destroy();
+          }
+
+
+          chartInstances['bidsChart' + coinType] = new Chart(bidsCtx, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'Bids',
+                  backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                  data: bidsChartData
+                },
+                {
+                  label: 'Asks',
+                  backgroundColor: 'red',
+                  data: asksChartData
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Price'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Quantity'
+                  }
+                }
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const quantity = context.raw;
+                      return `Quantity: ${quantity}`;
                     }
                   }
                 }
               }
-            });
-
-            // Sắp xếp các giá trị nhãn trục x
-            labels.sort((a, b) => a - b);
-
-            // Chuyển đổi object thành mảng để cập nhật vào biểu đồ
-            const bidsChartData = labels.map(price => bidsData[price] || 0);
-            const asksChartData = labels.map(price => asksData[price] || 0);
-
-            // Cập nhật dữ liệu cho biểu đồ
-            bidsChart.data.labels = labels; // Sử dụng giá làm nhãn trục x
-            bidsChart.data.datasets[0].data = bidsChartData;
-            bidsChart.data.datasets[1].data = asksChartData;
-            myPieChart.data.datasets[0].data = [totalAsks, totalBids];
-
-            // Cập nhật biểu đồ
-            bidsChart.update();
-            myPieChart.update();
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
+            }
           });
-      }
 
-      // Load dữ liệu và cập nhật biểu đồ ban đầu
-      loadDataAndVisualize();
+          chartInstances['myPieChart' + coinType] = new Chart(ctx, {
+            type: 'pie',
+            data: {
+              labels: ['Asks', 'Bids'],
+              datasets: [{
+                data: [totalAsks, totalBids],
+                backgroundColor: ['#FF6384', '#36A2EB'],
+                hoverBackgroundColor: ['#FF6384', '#36A2EB']
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function (tooltipItem) {
+                      return tooltipItem.label + ': ' + tooltipItem.raw;
+                    }
+                  }
+                }
+              }
+            }
+          });
 
-      setInterval(loadDataAndVisualize, 10000); // Cập nhật mỗi 5 giây
-    });
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+
+          const bidsCtx = document.getElementById('bidsChart' + coinType).getContext('2d');
+          const ctx = document.getElementById('myPieChart' + coinType).getContext('2d');
+
+          if (chartInstances['bidsChart' + coinType]) {
+            chartInstances['bidsChart' + coinType].destroy();
+          }
+          if (chartInstances['myPieChart' + coinType]) {
+            chartInstances['myPieChart' + coinType].destroy();
+          }
+
+          chartInstances['bidsChart' + coinType] = new Chart(bidsCtx, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [
+                {
+                  label: 'Bids',
+                  backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                  data: []
+                },
+                {
+                  label: 'Asks',
+                  backgroundColor: 'red',
+                  data: []
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Price'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Quantity'
+                  }
+                }
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      const quantity = context.raw;
+                      return `Quantity: ${quantity}`;
+                    }
+                  }
+                }
+              }
+            }
+          });
+
+          chartInstances['myPieChart' + coinType] = new Chart(ctx, {
+            type: 'pie',
+            data: {
+              labels: ['Asks', 'Bids'],
+              datasets: [{
+                data: [0, 0],
+                backgroundColor: ['#FF6384', '#36A2EB'],
+                hoverBackgroundColor: ['#FF6384', '#36A2EB']
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function (tooltipItem) {
+                      return tooltipItem.label + ': ' + tooltipItem.raw;
+                    }
+                  }
+                }
+              }
+            }
+          });
+
+          chartInstances['bidsChart' + coinType] = bidsChart;
+          chartInstances['myPieChart' + coinType] = myPieChart;
+        });
+    }
+
+    // Reset alertShown flag when the selected date changes
+    alertShown[coinType] = false;
+
+    loadDataAndVisualize();
+
   }
+  document.getElementById('datetime_btc').style.display = 'none';
+  document.getElementById('datetime_eth').style.display = 'none';
+  document.getElementById('datetime_sol').style.display = 'none';
 
-  document.getElementById('datetime_btc').innerText = formattedDate
-  document.getElementById('datetime_sol').innerText = formattedDate
-  document.getElementById('datetime_eth').innerText = formattedDate
 </script>
 
 </html>
