@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO_PATH="C:/Users/Administrator/Documents/price_project_visual_github"
+REPO_PATH="/home/yuyu/Documents/product_2024/ob-btc-future"
 
 while true; do
     cd "$REPO_PATH" || { echo "Không thể thay đổi thư mục đến $REPO_PATH"; exit 1; }
