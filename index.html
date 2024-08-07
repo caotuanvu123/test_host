@@ -2144,7 +2144,7 @@
                 <i class="fe fe-home"></i> Liquidation Analytics
               </a>
               <div class="collapse" id="sidebarDashboardsLiquidation">
-                <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots" role="tablist" aria-orientation="vertical">
+                <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots-liquidation" role="tablist" aria-orientation="vertical">
                   <li class="nav-item" role="presentation">
                     <a id="btcPageButtonSpots" class="nav-link" id="btc-liquidation-tab" data-bs-toggle="tab"
                       data-bs-target="#btc-liquidation" type="button" role="tab" aria-controls="btc-liquidation" aria-selected="true">
@@ -2177,7 +2177,7 @@
                 <i class="fe fe-home"></i> Additional Information
               </a>
               <div class="collapse" id="sidebarDashboardsAInfo">
-                <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots" role="tablist" aria-orientation="vertical">
+                <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots-additional" role="tablist" aria-orientation="vertical">
                   <li class="nav-item" role="presentation">
                     <a id="btcPageButtonSpots" class="nav-link active" id="btc-additional-tab" data-bs-toggle="tab"
                       data-bs-target="#btc-additional" type="button" role="tab" aria-controls="btc-additional" aria-selected="true">
@@ -2210,7 +2210,7 @@
                       Futures Binance
                     </a>
                     <div class="collapse" id="sidebarSignIn">
-                      <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots" role="tablist" aria-orientation="vertical">
+                      <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots-trade" role="tablist" aria-orientation="vertical">
                         <li class="nav-item" role="presentation">
                           <a id="btcPageButtonSpots" class="nav-link active" id="btc-autotrade-tab" data-bs-toggle="tab"
                             data-bs-target="#btc-autotrade" type="button" role="tab" aria-controls="btc-autotrade" aria-selected="true">
@@ -2242,10 +2242,10 @@
                       Spots Binance
                     </a>
                     <div class="collapse" id="sidebarSignUp">
-                      <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots" role="tablist" aria-orientation="vertical">
+                      <ul class="nav nav-tabs nav-sm flex-column" id="v-pills-tab-spots-trade" role="tablist" aria-orientation="vertical">
                         <li class="nav-item" role="presentation">
-                          <a id="btcPageButtonSpots" class="nav-link active" id="btc-spots-tab" data-bs-toggle="tab"
-                            data-bs-target="#btc-spots" type="button" role="tab" aria-controls="btc-spots" aria-selected="true">
+                          <a id="btcPageButtonSpots" class="nav-link active" id="btc-spots-tab-trade" data-bs-toggle="tab"
+                            data-bs-target="#btc-spots-trade" type="button" role="tab" aria-controls="btc-spots-trade" aria-selected="true">
                             <img src="https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400"
                               alt="Bitcoin" width="24" height="24" style="margin-right: 8px;" />
                             BTC/USDT
@@ -7564,9 +7564,10 @@
           </div> <!-- / .row -->
         </div>
       </div>
+    </div>
 
-      <!-- Spots -->
-      <div class="tab-pane active" id="btc-spots" role="tabpanel" aria-labelledby="btc-spots-tab">
+    <div class="tab-content" id="table-content-spots">
+      <div class="tab-pane" id="btc-spots" role="tabpanel" aria-labelledby="btc-spots-tab">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12 col-lg-6 col-xl">
