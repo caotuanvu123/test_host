@@ -3576,12 +3576,6 @@
                 <h5 class="card-header-title">
                   Notifications
                 </h5>
-
-                <!-- Link -->
-                <a href="#!" class="small">
-                  View all
-                </a>
-
               </div> <!-- / .card-header -->
               <div class="card-body">
 
@@ -4863,10 +4857,6 @@
                   <h4 class="card-header-title">
                     Top OB
                   </h4>
-
-                  <!-- Link -->
-                  <a href="project-overview.html" class="small">View all</a>
-
                 </div>
                 <div class="card-body" style="margin-top: 0px;">
 
@@ -4876,8 +4866,13 @@
                     <tr>
                       <thead class="thead-light" style=" max-width: 100%" >
                       <th style="position: sticky; top: 0; font-size: 9px;">
-                        <a href="#" class="text-bdy-secondary list-sort" data-sort="time">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="time">
                           Time
+                        </a>
+                      </th>
+                      <th style="position: sticky; top: 0; font-size: 9px;">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="type">
+                          Type
                         </a>
                       </th>
                       <th style="position: sticky; top: 0; font-size: 9px;">
@@ -5683,10 +5678,6 @@
                   <h4 class="card-header-title">
                     Top OB
                   </h4>
-
-                  <!-- Link -->
-                  <a href="project-overview.html" class="small">View all</a>
-
               </div>
               <div class="card-body" style="margin-top: 0px;">
                 <div class="list-group list-group-flush my-n3" id="tableContainer"
@@ -5695,8 +5686,13 @@
                     <tr>
                       <thead class="thead-light" style=" max-width: 100%" >
                       <th style="position: sticky; top: 0; font-size: 9px;">
-                        <a href="#" class="text-bdy-secondary list-sort" data-sort="time">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="time">
                           Time
+                        </a>
+                      </th>
+                      <th style="position: sticky; top: 0; font-size: 9px;">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="type">
+                          Type
                         </a>
                       </th>
                       <th style="position: sticky; top: 0; font-size: 9px;">
@@ -6499,10 +6495,6 @@
                   <h4 class="card-header-title">
                     Top OB
                   </h4>
-
-                  <!-- Link -->
-                  <a href="project-overview.html" class="small">View all</a>
-
               </div>
               <div class="card-body" style="margin-top: 0px;">
                 <div class="list-group list-group-flush my-n3" id="tableContainer"
@@ -6511,8 +6503,13 @@
                     <tr>
                       <thead class="thead-light" style=" max-width: 100%" >
                       <th style="position: sticky; top: 0; font-size: 9px;">
-                        <a href="#" class="text-bdy-secondary list-sort" data-sort="time">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="time">
                           Time
+                        </a>
+                      </th>
+                      <th style="position: sticky; top: 0; font-size: 9px;">
+                        <a href="#" class="text-body-secondary list-sort" data-sort="type">
+                          Type
                         </a>
                       </th>
                       <th style="position: sticky; top: 0; font-size: 9px;">
@@ -6983,8 +6980,6 @@
                   </h4>
 
                   <!-- Link -->
-                  <a href="project-overview.html" class="small">View all</a>
-
                 </div>
                 <div class="card-body" style="margin-top: 0px;">
 
@@ -7977,6 +7972,7 @@
                         row.className = 'tbody-row'; // Gán lớp CSS
                         row.innerHTML = `
                                     <td>${displayTime}</td>
+                                    <td class="${(type == 'bid' ? 'text-primary' : 'text-danger')}">${String(type).toUpperCase()}</td>
                                     <td>${price}</td>
                                     <td>${quantity}</td>
                                     <td>${formattedNumber}</td>
