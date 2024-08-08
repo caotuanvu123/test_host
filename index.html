@@ -29,15 +29,12 @@
   <title>Analytics Cryptocurrencies | Auto Trade</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* Đặt kích thước của container cha */
     .chart-container {
       width: 100%;
       height: 100vh;
-      /* Chiều cao của toàn bộ khung nhìn */
       position: relative;
     }
 
-    /* Đặt kích thước của widget bên trong container cha */
     .tradingview-widget-container {
       width: 100%;
       height: 100%;
@@ -4805,7 +4802,7 @@
                   <!-- Selectbox for specific dates -->
                   <select id="dateRangeSelect_btc" class="form-select"
                           onchange="updateChartsBasedOnSelectedDate('btc')">
-                    <!-- Options sẽ được tạo động bằng JavaScript -->
+                    <!-- Options will be dynamically generated using JavaScript -->
                   </select>
                 </div>
 
@@ -5609,7 +5606,7 @@
                     <!-- Selectbox for specific dates -->
                     <select id="dateRangeSelect_eth" class="form-select"
                       onchange="updateChartsBasedOnSelectedDate('eth')">
-                      <!-- Options sẽ được tạo động bằng JavaScript -->
+                      <!-- Options will be dynamically generated using JavaScript -->
                     </select>
                   </div>
 
@@ -6427,7 +6424,7 @@
 
                     <!-- Selectbox for specific dates -->
                     <select id="dateRangeSelect_sol" class="form-select">
-                      <!-- Options sẽ được tạo động bằng JavaScript -->
+                      <!-- Options will be dynamically generated using JavaScript -->
                     </select>
                   </div>
 
@@ -6926,7 +6923,7 @@
                     <!-- Selectbox for specific dates -->
                     <select id="dateRangeSelect_btc" class="form-select"
                       onchange="updateChartsBasedOnSelectedDate('btc')">
-                      <!-- Options sẽ được tạo động bằng JavaScript -->
+                      <!-- Options will be dynamically generated using JavaScript -->
                     </select>
                   </div>
 
@@ -7772,7 +7769,7 @@
   }
 
   async function fetchPercentageChange(id) {
-    const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`; // Lấy dữ liệu trong 1 ngày
+    const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=1`; //Get data in 1 day
 
     try {
       const response = await fetch(url);
@@ -7781,22 +7778,22 @@
 
       if (prices.length === 0) return null;
 
-      // Lấy giá tại thời điểm bắt đầu và kết thúc
+      // Get price at start and end time
       const initialPrice = prices[0][1];
       const finalPrice = prices[prices.length - 1][1];
 
-      // Tính toán phần trăm thay đổi
+      // Calculate percentage change
       const percentageChange = ((finalPrice - initialPrice) / initialPrice) * 100;
 
-      return percentageChange.toFixed(2); // Làm tròn đến 2 chữ số thập phân
+      return percentageChange.toFixed(2); // Round to 2 decimal places
     } catch (error) {
-      console.error(`Lỗi khi lấy phần trăm thay đổi của ${id}:`, error);
+      console.error(`Error when getting percentage change of ${id}:`, error);
       return null;
     }
   }
 
   async function updatePricesAndBadges() {
-    // Cập nhật giá
+   // Update price
     const priceElements = document.querySelectorAll('span[data-symbol]');
     for (let element of priceElements) {
       const symbol = element.getAttribute('data-symbol');
@@ -7806,7 +7803,7 @@
       }
     }
 
-    // Cập nhật badge
+   // Update badge
     const badgeElements = document.querySelectorAll('span[data-badge-id]');
     for (let badge of badgeElements) {
       const id = badge.getAttribute('data-badge-id');
@@ -7820,7 +7817,7 @@
   }
 
   updatePricesAndBadges();
-  setInterval(updatePricesAndBadges, 60000); // Cập nhật mỗi phút
+  setInterval(updatePricesAndBadges, 60000); // Update every minute
 
   function updateChartsBasedOnSelectedDate(coinType) {
     const selectedDate = document.getElementById(`dateRangeSelect_${coinType}`).value;
@@ -7836,7 +7833,7 @@
       const selectedDate = this.value;
       spanElement.textContent = selectedDate;
       updateChartsBasedOnSelectedDate(coinType, selectedDate);
-      startUpdatingData(coinType, selectedDate); // Bắt đầu cập nhật dữ liệu
+      startUpdatingData(coinType, selectedDate); // Start updating data
     });
 
     spanElement.textContent = new Date().toISOString().split('T')[0].replace(/-/g, '/');
@@ -7909,7 +7906,7 @@
     let bidsData = {};
     let asksData = {};
     let labels = [];
-    let tableBody = document.getElementById(`${coinType}DataTable`); // Thay 'btcDataTable' bằng id của bảng của bạn
+    let tableBody = document.getElementById(`${coinType}DataTable`); //Replace 'btcDataTable' with your table id
 
     const csvFilePath = `csv/futures/future_order_book_${coinType}usdt_${selectedDate}.csv`;
     const addedEntries = new Set();
@@ -7917,7 +7914,7 @@
     function loadDataAndVisualize() {
       fetch(csvFilePath)
               .then(response => {
-                console.log(`Fetching data from: ${csvFilePath}`); // Log đường dẫn để kiểm tra
+                console.log(`Fetching data from: ${csvFilePath}`); // Log path to check
                 if (!response.ok) {
                   if (!alertShown[coinType]) {
                     alert(`Current data is not available for ${coinType.toUpperCase()} on ${selectedDate}`);
@@ -7965,11 +7962,11 @@
 
                         // Extract time (hour, minute, and second)
                         const timeParts = time.split(' ');
-                        const displayTime = timeParts[1].slice(0, 8); // Lấy giờ, phút và giây
+                        const displayTime = timeParts[1].slice(0, 8); //Get hours, minutes and seconds
 
                         // Tạo hàng mới cho bảng
                         const row = document.createElement('tr');
-                        row.className = 'tbody-row'; // Gán lớp CSS
+                        row.className = 'tbody-row'; //  CSS
                         row.innerHTML = `
                                     <td>${displayTime}</td>
                                     <td class="${(type == 'bid' ? 'text-primary' : 'text-danger')}">${String(type).toUpperCase()}</td>
