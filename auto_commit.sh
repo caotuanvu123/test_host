@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 40
+# sleep 40
 
 REPO_PATH="/home/yuyu/Documents/product_2024/ob-btc-future"
 cd "$REPO_PATH" || { echo "Cannot change directory to $REPO_PATH"; exit 1; }
