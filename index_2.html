@@ -30,17 +30,17 @@
             const bidsChart = new Chart(bidsCtx, {
                 type: 'bar',
                 data: {
-                    labels: [],  // Các nhãn trục x (giá)
+                    labels: [],  // The x-axis labels (price)
                     datasets: [
                         {
                             label: 'Bids',
                             backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                            data: []  // Dữ liệu cho các lệnh mua
+                            data: []  // Data for buy orders
                         },
                         {
                             label: 'Asks',
                             backgroundColor: 'red',
-                            data: []  // Dữ liệu cho các lệnh bán
+                            data: []  //Data for sell orders
                         }
                     ]
                 },
@@ -74,7 +74,7 @@
                 }
             });
 
-            // Khởi tạo biểu đồ Chart.js cho Pie Chart
+           // Initialize Chart.js chart for Pie Chart
             const myPieChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
@@ -103,28 +103,28 @@
             });
             const today = new Date();
 
-            // Lấy các thành phần của ngày hiện tại
+            /// Get the components of the current date
             const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
-            const day = String(today.getDate()).padStart(2, '0'); // Thêm số 0 phía trước nếu cần
+            const month = String(today.getMonth() + 1).padStart(2, '0'); //Add leading zero if needed
+            const day = String(today.getDate()).padStart(2, '0'); //Add leading zero if needed
 
-            // Định dạng ngày hiện tại theo kiểu YYYY-MM-DD
+           // Format current date in YYYY-MM-DD format
             const formattedDate = `${year}-${month}-${day}`;
 
-            // Đường dẫn đầy đủ tới file CSV
+            // Full path to CSV file
             const csvFilePath = `csv/future_order_book_btcusdt_${formattedDate}.csv`;
 
-            // Đường dẫn đầy đủ tới file CSV
+            // Full path to CSV file
             const addedEntries = new Set();
 
-            // Hàm load dữ liệu và cập nhật biểu đồ
+            // Function to load data and update chart
             let totalBids = 0;
             let totalAsks = 0;
             function loadDataAndVisualize() {
                 fetch(csvFilePath)
                     .then(response => response.text())
                     .then(data => {
-                        // Xử lý dữ liệu CSV
+                        // Process CSV data
                         let rows = data.split('\n');
                         
                         rows.forEach(row => {
@@ -161,20 +161,20 @@
                             }
                         });
 
-                        // Sắp xếp các giá trị nhãn trục x
+                        // Sort x-axis label values
                         labels.sort((a, b) => a - b);
 
-                        // Chuyển đổi object thành mảng để cập nhật vào biểu đồ
+                        // Convert object to array to update to chart
                         const bidsChartData = labels.map(price => bidsData[price] || 0);
                         const asksChartData = labels.map(price => asksData[price] || 0);
 
-                        // Cập nhật dữ liệu cho biểu đồ
-                        bidsChart.data.labels = labels; // Sử dụng giá làm nhãn trục x
+                        // Update data for chart
+                        bidsChart.data.labels = labels; // Use price as x-axis label
                         bidsChart.data.datasets[0].data = bidsChartData;
                         bidsChart.data.datasets[1].data = asksChartData;
                         myPieChart.data.datasets[0].data = [totalAsks, totalBids];
 
-                        // Cập nhật biểu đồ
+                        // Update chart
                         bidsChart.update();
                         myPieChart.update();
                     })
@@ -183,13 +183,12 @@
                     });
             }
 
-            // Load dữ liệu và cập nhật biểu đồ ban đầu
-            loadDataAndVisualize();
+          // Load data and update initial chart
+                loadDataAndVisualize();
 
-            // Cập nhật dữ liệu mỗi 5 giây
-            setInterval(loadDataAndVisualize, 10000); // Cập nhật mỗi 5 giây
+                // Update data every 5 seconds
+                setInterval(loadDataAndVisualize, 10000); // Update every 5 seconds
 
-            // // Hàm để lưu biểu đồ dưới dạng hình ảnh
             // function saveChartAsImage(chart, filename) {
             //     const link = document.createElement('a');
             //     link.href = chart.toBase64Image();
@@ -197,7 +196,6 @@
             //     link.click();
             // }
 
-            // // Event listeners cho nút lưu biểu đồ
             // document.getElementById('savePieChart').addEventListener('click', function() {
             //     saveChartAsImage(myPieChart, 'pie_chart.png');
             // });
