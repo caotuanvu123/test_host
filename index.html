@@ -7792,31 +7792,63 @@
   }
 
   async function updatePricesAndBadges() {
-   // Update price
     const priceElements = document.querySelectorAll('span[data-symbol]');
     for (let element of priceElements) {
       const symbol = element.getAttribute('data-symbol');
       const price = await fetchPrice(symbol);
       if (price !== null) {
+        const previousPrice = localStorage.getItem(symbol);
+        localStorage.setItem(symbol, price);
+
         element.textContent = `$${parseFloat(price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+    
+        if (previousPrice) {
+          console.log(`Symbol: ${symbol}`);
+          console.log(`Previous Price: ${previousPrice}`);
+          console.log(`Current Price: ${price}`);
+          updatePriceColors(element, previousPrice, price);
+        } else {
+          console.log(`Symbol: ${symbol}`);
+          console.log(`Current Price: ${price}`);
+        }
       }
     }
 
-   // Update badge
     const badgeElements = document.querySelectorAll('span[data-badge-id]');
     for (let badge of badgeElements) {
       const id = badge.getAttribute('data-badge-id');
       const percentageChange = await fetchPercentageChange(id);
+
       if (percentageChange !== null) {
-        badge.textContent = `${percentageChange}%`;
+        const formattedChange = percentageChange > 0 ? `+${percentageChange}%` : `${percentageChange}%`;
+
+        badge.textContent = formattedChange;
         badge.className = percentageChange > 0 ? 'badge text-bg-success-subtle mt-n1 small p-0 fw-normal' : 'badge text-bg-danger-subtle mt-n1 small p-0 fw-normal';
         badge.style.display = 'inline';
       }
     }
   }
 
+  function updatePriceColors(element, previousPrice, currentPrice) {
+    const previousPriceValue = parseFloat(previousPrice);
+    const currentPriceValue = parseFloat(currentPrice);
+
+    // Log giá trước và sau khi cập nhật màu sắc
+    console.log(`Price Comparison for Element: ${element.getAttribute('data-symbol')}`);
+    console.log(`Previous Price: ${previousPriceValue}`);
+    console.log(`Current Price: ${currentPriceValue}`);
+
+    if (currentPriceValue > previousPriceValue) {
+      element.style.color = 'green';
+    } else if (currentPriceValue < previousPriceValue) {
+      element.style.color = 'red';
+    }
+  }
+
+
   updatePricesAndBadges();
-  setInterval(updatePricesAndBadges, 60000); // Update every minute
+  setInterval(updatePricesAndBadges, 60000); // Cập nhật mỗi phút
 
   function updateChartsBasedOnSelectedDate(coinType) {
     const selectedDate = document.getElementById(`dateRangeSelect_${coinType}`).value;
